@@ -1,0 +1,71 @@
+﻿
+@{
+    ViewBag.Title = "dashboard";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+<section class="inner_page_breadcrumb dashboard">
+    <div class="container">
+        <div class="row"> </div>
+    </div>
+</section>
+
+<!-- About Text Content -->
+<section class="about-section">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 col-lg-2 col-xl-2 post2 hidden2">
+                <div class="side-heading">
+                    <i class="fa fa-book"></i> Student Panel
+                    <div class="clear"></div>
+                </div>
+                 
+
+                @{
+                    Html.RenderAction("_BindLeftMenu");
+                }
+
+            </div>
+            <div class="col-md-12 col-lg-10 col-xl-10">
+                <nav class="breadcrumb_widgets" aria-label="breadcrumb mb30">
+                    <h4 class="title float-left">Dashboard</h4>
+                    <ol class="breadcrumb float-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+                    </ol>
+                    <div class="clear"></div>
+                </nav>
+                <div class="row">
+                    <div class="col-sm-4 col-md-4">
+                        <div class="ff_one ff2">
+                            <div class="icon"><span class="flaticon-speech-bubble"></span></div>
+                            <div class="detais">
+                                <p>Messages</p>
+                                <div class="timer">45</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-md-4">
+                        <div class="ff_one ff2 style3">
+                            <div class="icon"><span class="flaticon-online-learning"></span></div>
+                            <div class="detais">
+                                <p>Courses</p>
+                                <div class="timer">2,589</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-md-4">
+                        <div class="ff_one ff2 style2">
+                            <div class="icon"><span class="flaticon-rating"></span></div>
+                            <div class="detais">
+                                <p>Reviews</p>
+                                <div class="timer">567</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+

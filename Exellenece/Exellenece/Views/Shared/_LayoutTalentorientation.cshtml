@@ -1,0 +1,372 @@
+﻿<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- css file -->
+    <link href="~/Content/Talentorientation/images/favicon.ico" rel="icon">
+    <link rel="stylesheet" href="~/Content/Talentorientation/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Content/Talentorientation/css/style.css">
+    <link href="~/Content/Manage/css/validation.css" rel="stylesheet" />
+    <link href="~/Content/Talentorientation/css/drop.css" rel="stylesheet" />
+    <link href="~/Content/Manage/css/gsdk-bootstrap-wizard.css" rel="stylesheet" />
+    <!-- Responsive stylesheet -->
+    <link rel="stylesheet" href="~/Content/Talentorientation/css/responsive.css">
+     
+    <link href="~/Content/Talentorientation/css/onload.css" rel="stylesheet" />
+    <!-- Title -->
+    <title>Talent Orientations</title>
+</head>
+<body> 
+    
+    <div class="wrapper">
+        <!-- Main Header Nav -->
+        <header class="header-nav menu_style_home_one navbar-scrolltofixed stricky main-menu">
+            <div class="container-fluid">
+                <!-- Ace Responsive Menu -->
+                <nav>
+                    <!-- Menu Toggle btn-->
+                    <div class="menu-toggle">
+                        <a href="/"><img class="nav_logo_img img-fluid" src="~/Content/Talentorientation/images/header-logo.png" alt="header-logo.png"></a>
+                        <button type="button" id="menu-btn"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+                    </div>
+                    <a href="/" class="navbar_brand float-left dn-smd">
+                        <img class="logo1 img-fluid" src="~/Content/Talentorientation/images/header-logo.png" alt="header-logo.png">
+                        <img class="logo2 img-fluid" src="~/Content/Talentorientation/images/header-logo2.png" alt="header-logo2.png">
+                    </a>
+                    <!-- Responsive Menu Structure-->
+                    <!--Note: declare the Menu style in the data-menu-style="horizontal" (options: horizontal, vertical, accordion) -->
+
+                    <ul id="respMenu" class="ace-responsive-menu" data-menu-style="horizontal">
+
+
+                        <li> <a href="index"><i class="fa fa-home" aria-hidden="true"></i></a></li>
+                        <li> <a href="/ncert-solutions"> NCERT Solution</a>  </li>
+
+                        <li><a href="/entrance-exams">Entrance Exams</a></li>
+                        <li><a href="/jee-neet">JEE/NEET</a></li>
+
+                        <li>
+                            <a href="#"><span class="title">Classess </span></a>
+                            <ul>
+                                @{Html.RenderAction("classList"); }
+                            </ul>
+                            
+
+
+                        </li>
+
+                        <li><a href="/about-us">About Us</a></li>
+                        <li><a href="/contact-us">Contact Us</a></li>
+                        <li class="last"><a href="/package">Package</a></li>
+                    </ul>
+                    @if (Session["UserLogin"] == null)
+                    {
+                        <ul class="sign_up_btn pull-right dn-smd mt20">
+                            <li class="list-inline-item list_s loginlink">
+                                <a href="/login" title="Login" class="btn flaticon-user btn11"> Login</a>
+                            </li>
+
+                            <li class="list-inline-item list_s loginlink">
+                                <a href="/register" title="Register" class="btn btn11">
+                                    <span class="">
+                                        <i class="fa fa-lock" aria-hidden="true" style="font-size: 22px;"></i>
+                                    </span> Register
+                                </a>
+                            </li>
+
+                            <li class="list-inline-item list_s">
+                                <div class="search_overlay"> <a id="search-button-listener" class="mk-search-trigger mk-fullscreen-trigger" href="#"> <span id="search-button"><i class="flaticon-magnifying-glass"></i></span> </a> </div>
+                            </li>
+                        </ul>
+                    }
+                    else
+                    {
+                        <ul id="nav" class="sign_up_btn pull-right dn-smd mt20 innerpagelist">
+                            <!-- <li class="list-inline-item list_s loginlink">
+                            <a href="login.html" title="Login" class="btn flaticon-user btn11"> Login</a></li>
+
+                            <li class="list-inline-item list_s loginlink">
+                             <a href="register.html" title="Register" class="btn btn11"><span class="">
+                                   <i class="fa fa-lock" aria-hidden="true" style="font-size: 22px;"></i></span> Register</a></li> -->
+                            <li>
+                                <a href="#"><i class="fa fa-user"></i> Welcome @Session["User_Name"] <i class="fa fa-caret-down"></i></a><!-- My Account -->
+                                <ul>
+                                    <li><a href="/dashboard">Dashboard</a></li>
+                                    <li><a href="/my-profile">My Profile</a></li>
+                                    <li><a href="/change-password">Change Password</a></li>
+                                    <li style="border-bottom:none;"><a href="/logout">Log Out</a></li>
+                                </ul>
+                            </li>
+
+
+                            <li class="list-inline-item list_s">
+                                <div class="search_overlay"> <a id="search-button-listener" class="mk-search-trigger mk-fullscreen-trigger" href="#"> <span id="search-button"><i class="flaticon-magnifying-glass"></i></span> </a> </div>
+                            </li>
+                        </ul>
+                    } 
+                    
+                    <!-- Button trigger modal -->
+                </nav>
+            </div>
+        </header>
+        <!-- Modal -->
+        <!-- Modal Search Button Bacground Overlay -->
+        <div class="search_overlay dn-992">
+            <div class="mk-fullscreen-search-overlay" id="mk-search-overlay">
+                <a href="#" class="mk-fullscreen-close" id="mk-fullscreen-close-button"><i class="fa fa-times"></i></a>
+                <div id="mk-fullscreen-search-wrapper">
+                    <form method="get" id="mk-fullscreen-searchform">
+                        <input type="text" value="" placeholder="Search courses..." id="mk-fullscreen-search-input">
+                        <i class="flaticon-magnifying-glass fullscreen-search-icon">
+                            <input value="" type="submit">
+                        </i>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Header Nav For Mobile -->
+        <div id="page" class="stylehome1 h0">
+            <div class="mobile-menu">
+                <div class="header stylehome1">
+                    <div class="main_logo_home2"> <img class="nav_logo_img img-fluid float-left mt20" src="~/Content/Talentorientation/images/header-logo.png" alt="header-logo.png"><!-- <span>edumy</span> --></div>
+                    <ul class="menu_bar_home2">
+                        <li class="list-inline-item">
+                            <div class="search_overlay">
+                                <a id="search-button-listener2" class="mk-search-trigger mk-fullscreen-trigger" href="#">
+                                    <div id="search-button2"><i class="flaticon-magnifying-glass"></i></div>
+                                </a>
+                                <div class="mk-fullscreen-search-overlay" id="mk-search-overlay2">
+                                    <a href="#" class="mk-fullscreen-close" id="mk-fullscreen-close-button2"><i class="fa fa-times"></i></a>
+                                    <div id="mk-fullscreen-search-wrapper2">
+                                        <form method="get" id="mk-fullscreen-searchform2">
+                                            <input type="text" value="" placeholder="Search courses..." id="mk-fullscreen-search-input2">
+                                            <i class="flaticon-magnifying-glass fullscreen-search-icon">
+                                                <input value="" type="submit">
+                                            </i>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="list-inline-item"><a href="#menu"><span></span></a></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- /.mobile-menu -->
+            <nav id="menu" class="stylehome1">
+                <ul> 
+                    <li> <a href="index"><i class="fa fa-home" aria-hidden="true"></i></a></li>
+                    <li> <a href="/ncert-solutions"> NCERT Solution</a>  </li>
+
+                    <li><a href="/entrance-exams">Entrance Exams</a></li>
+                    <li><a href="/jee-neet">JEE/NEET</a></li>
+
+                    <li>
+                        <a href="#"><span class="title">Courses</span></a>
+
+                        <ul>
+                            @{Html.RenderAction("classList"); }
+                        </ul>
+
+                    </li>
+
+
+
+
+                    <li><a href="/about-us">About Us</a></li>
+                    <li><a href="/contact-us">Contact Us</a></li>
+                    <li class="last"><a href="/package">Package</a></li>
+
+                    <li class="mm-listitem"><a href="/login" class="mm-listitem__text"><span class="flaticon-user"></span> Login</a></li>
+                    <li class="mm-listitem"><a href="/register" class="mm-listitem__text"><span class="flaticon-edit"></span> Register</a></li>
+
+                </ul>
+            </nav>
+        </div>
+
+        <!-- 2nd Home Slider -->
+
+
+        @RenderBody()
+
+        
+
+        <!-- Our Footer -->
+        <section class="footer_one">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6 col-md-4 col-md-3 col-lg-3">
+                        <div class="footer_contact_widget">
+                            <h4>CONTACT INFO</h4>
+                            <p style="position: relative; padding-left: 25px; line-height: 22px;">
+                                <i class="fa fa-map-marker" aria-hidden="true" style="position: absolute; left: 0; top: 0px; font-size: 20px;"></i>
+                                D32/3,<br />Sangam Vihar,<br />New Delhi 110062
+                            </p>
+
+                            <p style="position: relative; padding-left: 25px; margin-top: 15px; line-height: 22px;">
+                                <i class="fa fa-mobile" aria-hidden="true" style="position: absolute; left: 0; top: 0px; font-size: 22px;"></i>
+                                <strong>+91-72340-64024</strong><br />
+                                <strong>+91-96673-74798</strong>
+                            </p>
+
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-4 col-md-3 col-lg-2">
+                        <div class="footer_company_widget">
+                            <h4>CLASSES</h4>
+                            <ul class="list-unstyled">
+                                @{Html.RenderAction("classList1"); }
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-4 col-md-3 col-lg-2">
+                        <div class="footer_program_widget">
+                            <h4>&nbsp;</h4>
+                            <ul class="list-unstyled">
+                                @{Html.RenderAction("classList2"); }
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-4 col-md-3 col-lg-2">
+                        <div class="footer_support_widget">
+                            <h4>OTHER LINKS</h4>
+                            <ul class="list-unstyled">
+                                <li><a href="/ncert-solutions">NCERT SOLUTIONS</a></li>
+                                <li><a href="/entrance-exams">ENTRANCE EXAMS</a></li>
+                                <li><a href="/jee-neet">JEE/NEET</a></li>
+                                <li><a href="/login">LOGIN</a></li>
+                                <li><a href="/register">REGISTER</a></li>
+                                <li><a href="/career">CAREER</a></li>
+                                <li><a href="/contact-us">CONTACT US</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-md-3 col-lg-3">
+                        <div class="footer_apps_widget">
+                            <h4>MOBILE</h4>
+                            <div class="app_grid">
+                                <button class="apple_btn btn-dark"> <span class="icon"> <span class="flaticon-apple"></span> </span> <span class="title">App Store</span> <span class="subtitle">Available now on the</span> </button>
+                                <button class="play_store_btn btn-dark"> <span class="icon"> <span class="flaticon-google-play"></span> </span> <span class="title">Google Play</span> <span class="subtitle">Get in on</span> </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Our Footer Middle Area -->
+        <section class="footer_middle_area p0">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-4 col-md-3 col-lg-3 col-xl-2 pb15 pt15">
+                        <div class="logo-widget home1"> <img class="img-fluid" src="~/Content/Talentorientation/images/header-logo.png" alt="header-logo.png"> </div>
+                    </div>
+                    <div class="col-sm-8 col-md-5 col-lg-6 col-xl-7 pb25 pt25">
+                        <div class="footer_menu_widget">
+                            <ul>
+                                <li class="list-inline-item"><a href="/">Home</a></li>
+                                <li class="list-inline-item"><a href="/about-us">About Us</a></li>
+                                <li class="list-inline-item"><a href="/privacy-policy">Privacy Policy</a></li>
+                                <li class="list-inline-item"><a href="/terms-of-use">Terms Of Use</a></li>
+                                <li class="list-inline-item"><a href="/payment-pricing">Payment & Pricing</a></li>
+                                <li class="list-inline-item"><a href="/use-of-website">Use Of Website</a></li>
+
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3 pb15 pt15">
+                        <div class="footer_social_widget mt15">
+                            <ul>
+                                <li class="list-inline-item"><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                <li class="list-inline-item"><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                <li class="list-inline-item"><a href="#"><i class="fa fa-instagram"></i></a></li>
+                                <li class="list-inline-item"><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Our Footer Bottom Area -->
+        <section class="footer_bottom_area pt25 pb25">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-lg-6">
+                        <div class="copyright-widget">
+                            <p>Copyright © 2020 Talent Orientations | All Rights Reserved.</p>
+
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+
+                        <div class="powerd">
+                            <a href="https://www.akswebsoft.com/" target="_blank"><img src="~/Content/Talentorientation/images/powerdby.png" alt="AKS WebSoft Consultig Pvt Ltd" title="AKS WebSoft Consultig Pvt Ltd"></a>
+                        </div>
+                    </div> 
+
+                </div>
+            </div>
+        </section>
+
+
+        <a class="scrollToHome" href="#"><i class="flaticon-up-arrow-1"></i></a>
+    </div>
+    <!-- Wrapper End --> 
+ <script type="text/javascript" src="~/Content/Talentorientation/js/jquery-3.3.1.js"></script> 
+<script type="text/javascript" src="~/Content/Talentorientation/js/jquery-migrate-3.0.0.min.js"></script> 
+
+
+
+<!--<script type="text/javascript" src="js/popper.min.js"></script>--> 
+
+
+
+<script type="text/javascript" src="~/Content/Talentorientation/js/bootstrap.min.js"></script> 
+<script type="text/javascript" src="~/Content/Talentorientation/js/jquery.mmenu.all.js"></script> 
+<script type="text/javascript" src="~/Content/Talentorientation/js/ace-responsive-menu.js"></script> 
+<script type="text/javascript" src="~/Content/Talentorientation/js/bootstrap-select.min.js"></script> 
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function ()
+        {
+            $(function ()
+            {
+                setTimeout(function () { $("#myModal").modal('show').slow(); },10000);
+            });
+		
+	});
+    </script>
+<!--
+<script type="text/javascript" src="js/isotop.js"></script> 
+
+<script type="text/javascript" src="js/snackbar.min.js"></script>-->
+
+<!--<script type="text/javascript" src="js/simplebar.js"></script> -->
+<script type="text/javascript" src="~/Content/Talentorientation/js/parallax.js"></script> 
+<script type="text/javascript" src="~/Content/Talentorientation/js/scrollto.js"></script> 
+<script type="text/javascript" src="~/Content/Talentorientation/js/jquery-scrolltofixed-min.js"></script> 
+<script type="text/javascript" src="~/Content/Talentorientation/js/jquery.counterup.js"></script> 
+<script type="text/javascript" src="~/Content/Talentorientation/js/wow.min.js"></script> 
+<script type="text/javascript" src="~/Content/Talentorientation/js/progressbar.js"></script> 
+<script type="text/javascript" src="~/Content/Talentorientation/js/slider.js"></script> 
+<script type="text/javascript" src="~/Content/Talentorientation/js/timepicker.js"></script> 
+<!-- Custom script for all pages --> 
+<script type="text/javascript" src="~/Content/Talentorientation/js/script.js"></script>
+     
+    <script src="~/Content/Manage/validationjs/jquery.validate.min.js"></script>
+    <script src="~/Content/Manage/validationjs/jquery.validate.unobtrusive.js"></script>
+    <script src="~/Content/Manage/js/bootstrap.min.js"></script>
+    <script src="~/Content/Talentorientation/Myjs/jquery.unobtrusive-ajax.min.js"></script>
+    @RenderSection("scripts", required: false)
+</body>
+
+</html>

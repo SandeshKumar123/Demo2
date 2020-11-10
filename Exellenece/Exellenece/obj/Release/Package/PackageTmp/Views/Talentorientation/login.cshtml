@@ -1,0 +1,106 @@
+﻿@model Exellenece.Models.Register
+@{
+    ViewBag.Title = "login";
+    Layout = "~/Views/Shared/_LayoutTalentorientation.cshtml";
+}
+<section class="inner_page_breadcrumb">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-6">
+                <div class="breadcrumb_content">
+                    <h4 class="breadcrumb_title">Login</h4>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Login</li>
+                    </ol>
+                </div>
+            </div>
+            <div class="col-xl-6">
+                <div class="header_socallink">
+                    <div class="footer_social_widget mt15">
+                        <ul>
+                            <li class="list-inline-item"><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li class="list-inline-item"><a href="#"><i class="fa fa-twitter"></i></a></li>
+                            <li class="list-inline-item"><a href="#"><i class="fa fa-instagram"></i></a></li>
+                            <li class="list-inline-item"><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+ <section class="our-log bgc-fa sec">
+
+
+
+    <div class="container">
+        <div class="row">
+
+            <div class="col-sm-12 col-md-6">
+                <div class="h-center dib">
+                    <h2 class="title22">GET The <strong>Talent Orientations</strong></h2>
+                    <div class="se">
+                        <ul>
+                            <li>Live Interactive Classes</li>
+                            <li>Prepare Entrance Exams</li>
+                            <li>Test Generator</li>
+                            <li>Scholarships</li>
+                            <li>Mentoring</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="col-sm-12 col-md-6">
+                <div class="login_form inner_page">
+                    @using (Html.BeginForm("login", "Talentorientation", FormMethod.Post))
+                    {
+
+                        <div class="heading">
+                            @if (ViewBag.Err != null)
+                            {
+                                <div style="font-size:14px; ">
+                                    <div class="alert alert-danger alert-dismissible">
+                                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                        <strong>Error!! </strong>@ViewBag.Err
+                                    </div>
+                                </div>
+                            }
+                            <h3 class="text-center">Login to your account</h3>
+
+                            <div style="text-align:center;"> Don't have an account yet? <a href="/register" style="text-align:center;"><strong>Register</strong></a></div>
+                        </div>
+                        <div class="form-group">
+                            @Html.TextBoxFor(Model => Model.Email, new { @placeholder = "Email", @class = "form-control" })
+                            <span>@Html.ValidationMessageFor(model => model.Email)</span>
+                        </div>
+                        <div class="form-group">
+                            @Html.PasswordFor(Model => Model.Password, new { @placeholder = "Password", @class = "form-control" })
+                            <span>@Html.ValidationMessageFor(model => model.Password)</span>
+                        </div>
+                        <div class="form-group custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="exampleCheck3">
+                            <label class="custom-control-label" for="exampleCheck3">Remember me</label>
+                            <a class="tdu btn-fpswd float-right" href="register.html">Forgot Password?</a>
+                        </div>
+                        <button type="submit" class="btn btn-log btn-block btn-thm2">Login</button>
+
+                        <div class="row mt40">
+                            <!--<div class="col-lg">
+                    <button type="submit" class="btn btn-block color-white bgc-fb mb0"><i class="fa fa-facebook float-left mt5"></i> Facebook</button>
+                </div>-->
+                            <!--<div class="col-lg">
+                    <button type="submit" class="btn btn2 btn-block color-white bgc-gogle mb0"><i class="fa fa-google float-left mt5"></i> Google</button>
+                </div>-->
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>

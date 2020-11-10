@@ -1,0 +1,74 @@
+﻿@model Exellenece.Models.Exam1
+@{
+    ViewBag.Title = "learnwithvideo";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+<section class="inner_page_breadcrumb dashboard">
+    <div class="container">
+        <div class="row">
+
+        </div>
+    </div>
+</section>
+
+<!-- About Text Content -->
+<section class="about-section">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 col-lg-2 col-xl-2 post2 hidden2">
+                <div class="side-heading">
+                    <i class="fa fa-book"></i> Student Panel
+                    <div class="clear"></div>
+                </div>
+
+
+                @{
+                    Html.RenderAction("_BindLeftMenu");
+                }
+
+
+
+
+            </div>
+
+            <div class="col-md-12 col-lg-10 col-xl-10">
+                <nav class="breadcrumb_widgets" aria-label="breadcrumb mb30">
+                    <h4 class="title float-left">Learn with Video</h4>
+                    <ol class="breadcrumb float-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item"><a href="#">My Courses</a></li>
+                        <li class="breadcrumb-item"><a href="#">@ViewBag.Board_Name</a></li>
+                        <li class="breadcrumb-item"><a href="#">@ViewBag.Clas_Name</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">@ViewBag.Subject_Name</li>
+                    </ol> 
+                    <div class="clear"></div>
+                </nav>
+                <div class="row">
+                    @foreach (var item in Model.ChapterList)
+                    {
+                        <div class="col-md-12">
+                            <div class="videoheading">
+                                <h3>@item.Chapter_Heading</h3>
+                            </div> 
+                            <div class="learn-with-video">
+                                <div class="video-box2">
+                                    @if (item.Chapter_Video.StartsWith("https"))
+                                    {
+                                        <iframe src="@item.Chapter_Video" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+                                    }
+                                    else
+                                    {
+
+                                    }
+                                    <iframe src="/Content/Manage/Chaptervideos/@item.Chapter_Video" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                </div> 
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>

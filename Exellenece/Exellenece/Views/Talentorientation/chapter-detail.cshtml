@@ -1,0 +1,81 @@
+﻿@model Exellenece.Models.Exam1
+@{
+    ViewBag.Title = "ChapterDetails";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+<section class="inner_page_breadcrumb dashboard">
+    <div class="container">
+        <div class="row"> </div>
+    </div>
+</section>
+<section class="about-section">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 col-lg-2 col-xl-2 post2 hidden2">
+                <div class="side-heading">
+                    <i class="fa fa-book"></i> Student Panel
+                    <div class="clear"></div>
+                </div>
+
+
+                @{
+                    Html.RenderAction("_BindLeftMenu");
+                }
+
+
+
+
+            </div>
+
+            <div class="col-md-12 col-lg-10 col-xl-10">
+                <nav class="breadcrumb_widgets" aria-label="breadcrumb mb30">
+                    <h4 class="title float-left">@ViewBag.Board_Name - @ViewBag.Clas_Name-@ViewBag.Subject_Name</h4>
+                    <ol class="breadcrumb float-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item"><a href="#">My Courses</a></li>
+                        <li class="breadcrumb-item"><a href="#">@ViewBag.Board_Name</a></li>
+                        <li class="breadcrumb-item"><a href="#">@ViewBag.Subject_Name</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">@ViewBag.Clas_Name</li>
+                    </ol>
+
+                    <div class="clear"></div>
+                </nav>
+
+                <div class="row">
+
+
+                    <div class="col-md-12">
+
+                        <div class="background22">
+
+                            @foreach (var item in Model.ChapterList)
+                            {
+                                @Html.Raw(item.Chapter_Content);
+
+
+                                using (Html.BeginForm("learn-with-video", "Talentorientation", FormMethod.Post))
+                                {
+                                    @Html.HiddenFor(c => c.Id, new { @Value = item.Id });
+
+                                    <button type="submit" class="my_setting_savechange_btn btn btn-thm pull-left fontsize mgtop"><i class="fa fa-video-camera"></i> Learn with Video</button>
+
+                                 }
+                                using (Html.BeginForm("online-test", "Talentorientation", FormMethod.Post))
+                                {
+                                    @Html.HiddenFor(c => c.Id, new { @Value = item.Id });
+
+                                    <button type="submit" class="my_setting_savechange_btn btn btn-thm pull-right fontsize mgtop orange"><i class="fa fa-pencil-square-o"></i> Online Test</button>
+                                }
+                            }
+                              
+                            <div class="clear"></div>
+                        </div>
+                        
+
+                    </div> 
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>

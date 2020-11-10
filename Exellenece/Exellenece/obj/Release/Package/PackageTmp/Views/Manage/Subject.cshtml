@@ -1,0 +1,115 @@
+﻿@model Exellenece.Models.Subject
+    @{
+        ViewBag.Title = "Subject";
+        Layout = "~/Views/Shared/_LayoutManage.cshtml";
+    }
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1 class="m-0 text-dark">Subject</h1>
+                        @if (TempData["Err"] != null)
+                        {
+                            <div style="font-size:14px; ">
+                                <div class="alert alert-danger alert-dismissible">
+                                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                    <strong>Error!! </strong>@TempData["Err"]
+                                </div>
+                            </div>
+                        }
+                        @if (TempData["Succ"] != null)
+                        {
+                            <div style="font-size:14px; ">
+                                <div class="alert alert-success alert-dismissible">
+                                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                    <strong>Success!! </strong>@TempData["Succ"]
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    <!-- /.col -->
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="/Manage/dashboard">Home</a></li>
+                            <li class="breadcrumb-item active">Subject</li>
+                        </ol>
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.container-fluid -->
+        </div>
+        <!-- /.content-header -->
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <!-- Small boxes (Stat box) -->
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card card-primary">
+                            <div class="card-header">
+                                <h3 class="card-title">Form</h3>
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse"> <i class="fas fa-minus"></i></button>
+                                </div>
+                            </div>
+                            @using (Html.BeginForm("Subject", "Manage", FormMethod.Post))
+                            {
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <label for="inputName">Enter Subject name</label>
+                                        @Html.TextBoxFor(Model => Model.Subject_Name, new { @class = "form-control" })
+                                        <span>@Html.ValidationMessageFor(model => model.Subject_Name)</span>
+                                    </div>  
+                                    
+                                    <div class="form-group">
+                                        <label for="inputName">Active/Deactive</label>
+                                        @Html.DropDownListFor(x => x.Status, new List<SelectListItem>
+                                {
+                                                     new SelectListItem() {Text = "Active", Value="Active"},
+                                                     new SelectListItem() {Text = "Deactive", Value="Deactive"},
+
+                                }, "Select Status", new { @class = "form-control" })
+                                        <span>@Html.ValidationMessageFor(model => model.Status )</span>
+                                    </div>
+                                    <div class="form-group">
+                                        @if (ViewBag.btn == "Update")
+                                        {
+                                            <input type="submit" value="Update" class="btn btn-success float-right" name="cmd" />
+                                        }
+                                        else
+                                        {
+                                            <input type="submit" value="Submit" class="btn btn-success float-right" name="cmd" />
+                                        }
+                                    </div>
+                                </div>
+                            }
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                </div>
+                <!-- /.row -->
+                <!-- Main row -->
+                <div class="row">
+                    <!-- Left col -->
+                    <div class="col-md-12">
+                        <div class="card card-primary">
+
+                            @{
+                                Html.RenderAction("_subjectview", new { page = @ViewBag.Type });
+                            }
+                             
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                </div>
+                <!-- /.row (main row) -->
+            </div>
+            <!-- /.container-fluid -->
+        </section>
+        <!-- /.content -->
+    </div>

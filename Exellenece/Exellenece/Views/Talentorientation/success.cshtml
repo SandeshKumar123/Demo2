@@ -1,0 +1,82 @@
+﻿
+@{
+    ViewBag.Title = "success";
+    Layout = "~/Views/Shared/_LayoutTalentorientation.cshtml";
+}
+<section class="inner_page_breadcrumb">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-6">
+                <div class="breadcrumb_content">
+                    <h4 class="breadcrumb_title">Transaction sucsess</h4>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    </ol>
+                </div>
+            </div>
+            <div class="col-xl-6">
+                <div class="header_socallink">
+                    <div class="footer_social_widget mt15">
+                        <ul>
+                            <li class="list-inline-item"><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li class="list-inline-item"><a href="#"><i class="fa fa-twitter"></i></a></li>
+                            <li class="list-inline-item"><a href="#"><i class="fa fa-instagram"></i></a></li>
+                            <li class="list-inline-item"><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="about-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 offset-3">
+                <div class="payment-box">
+                    <div class="payment">
+                        <div class="check"><img src="/Content/Talentorientation/images/images/check.png"> </div>
+                        <h2>Payment Successful</h2>
+                        <p>Your payment has been processed! Details of transactions are included below</p>
+                    </div>
+
+                    @*<div class="fl-left">
+                        <div class="user-id amount">Amount</div>
+                        <div class="colone">:</div>
+                        <div class="form-right amount"><i class="fa fa-rupee"></i> 2000.00</div>
+                        <div class="clear"></div>
+                    </div>*@
+
+                    <div class="fl-left">
+                        <div class="user-id">Transaction Id</div>
+                        <div class="colone">:</div>
+                        <div class="form-right">@Session["order_id"]</div>
+                        <div class="clear"></div>
+                    </div>
+
+                    @*<div class="fl-left">
+                        <div class="user-id">Payment Type</div>
+                        <div class="colone">:</div>
+                        <div class="form-right">Net Banking</div>
+                        <div class="clear"></div>
+                    </div>*@
+
+                    <div class="fl-left">
+                        <div class="user-id">Transaction Time</div>
+                        <div class="colone">:</div>
+                        <div class="form-right">@DateTime.Now</div>
+                        <div class="clear"></div>
+                    </div>
+
+
+
+
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>

@@ -1,0 +1,222 @@
+﻿@model Exellenece.Models.Exam1
+@{
+    ViewBag.Title = "test";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+<style>
+    .not-allowed {cursor: not-allowed;}
+</style> 
+
+ <script language="javascript">
+     function startTimer(duration, display)
+     {
+         var timer = duration, minutes, seconds;
+         setInterval(function ()
+         {
+              
+             minutes = parseInt(timer / 60, 10);
+             seconds = parseInt(timer % 60, 10);
+             if ((minutes == 0) && seconds == 1)
+             {
+                 document.getElementById("form").submit();
+             }
+             minutes = minutes < 10 ? "0" + minutes : minutes;
+             seconds = seconds < 10 ? "0" + seconds : seconds;
+
+             display.textContent = minutes + ":" + seconds;
+
+             if (--timer < 0)
+             {
+                 timer = duration;
+             }
+         }, 1000);
+     }
+
+     window.onload = function () {
+         var fiveMinutes = 60 * 15,
+             display = document.querySelector('#time');
+         startTimer(fiveMinutes, display);
+     };
+</script>
+ 
+
+<script>
+
+    function changenumber()
+    {
+        debugger
+        var no = $("#count").text();
+        var total = $("#total").text();
+
+        var add = (parseInt(no) + 1); 
+        $("#count").text(add);
+        if ((parseInt(total))==((parseInt(no)+1)))
+        {  
+            $('#next').html(" <a class='my_setting_savechange_btn btn btn-thm mgtop padding22' href='#' style='cursor:not-allowed' role='button' data-slide='next'> Next<span class='sr-only'>Next</span></a>");
+            return false;
+        }
+
+    }
+</script>
+<section class="inner_page_breadcrumb dashboard">
+    <div class="container">
+        <div class="row">
+
+        </div>
+    </div>
+</section>
+
+<!-- About Text Content -->
+<section class="about-section">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 col-lg-2 col-xl-2 post2 hidden2">
+                <div class="side-heading">
+                    <i class="fa fa-book"></i> Student Panel
+                    <div class="clear"></div>
+                </div>
+
+
+                 @{
+                     Html.RenderAction("_BindLeftMenu");
+                }
+                 
+            </div>
+
+            <div class="col-md-12 col-lg-10 col-xl-10">
+                <nav class="breadcrumb_widgets" aria-label="breadcrumb mb30">
+                    <h4 class="title float-left">Questions <span id="count">1</span> of <span id="total">@Model.ExamList.Count</span> Time: <span id="time">15:00</span></h4>
+                    <ol class="breadcrumb float-right">
+                        <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
+                        <li class="breadcrumb-item"><a href="#">@ViewBag.Board_Name</a></li>
+                        <li class="breadcrumb-item"><a href="#">@ViewBag.Clas_Name</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">@ViewBag.Subject_Name</li>
+                    </ol>
+
+                    <div class="clear"></div>
+                </nav>
+
+                <div class="row">
+
+
+                    <div class="col-md-12">
+                        <div class="background22">
+                            <div id="carouselExampleIndicators" class="carousel slide carousel-fade" data-ride="carousel" data-interval="false"> 
+                                 @using (Html.BeginForm("MyScore", "Talentorientation", FormMethod.Post,new {id= "form" }))
+                                 {
+
+                                    <div class="carousel-inner">
+                                        @{int i = 0;
+                                            string className = "";
+                                        }
+                                        @foreach (var item in Model.ExamList)
+                                        {
+                                            <input type="hidden" name="Exams_Id" value="@item.Id" />
+                                            if (i == 0)
+                                            {
+                                                className = "active";
+                                            }
+                                            else
+                                            {
+                                                className = "";
+                                            }
+                                            <div class="carousel-item @className">
+                                                <div class="common_data">
+
+                                                    <p>@Html.Raw(item.Question)</p>
+
+                                                </div> 
+
+                                                <div class="question">
+
+                                                    <span>A) </span>
+                                                    <input type="radio" name="answec_@i" qno="1" id="answec1_@i" value="Answer A_@item.Id">
+
+                                                    <p>@item.Answer_A</p>
+
+                                                    <div class="clear"></div>
+                                                </div>
+
+                                                <div class="question">
+
+                                                    <span>B) </span>
+                                                    <input type="radio" name="answec_@i" qno="1" id="answec1_@i" value="Answer B_@item.Id">
+                                                    
+                                                    <p>@item.Answer_B</p>
+                                                    <div class="clear"></div>
+
+                                                </div>
+
+                                                <div class="question">  
+                                                    <span>C) </span>
+                                                    <input type="radio" name="answec_@i" qno="1" id="answec1_@i" value="Answer C_@item.Id">
+
+                                                    <p>@item.Answer_C</p>
+
+                                                    <div class="clear"></div>
+                                                </div>
+
+                                                <div class="question">
+
+                                                    <span>D)</span>
+                                                    <input type="radio" name="answec_@i" qno="1" id="answec1_@i" value="Answer D_@item.Id">
+
+                                                    <p>@item.Answer_D</p>
+
+                                                    <div class="clear"></div>
+                                                </div>
+
+                                            </div>
+                                            i = i + 1;
+                                        } 
+                                      <input type="hidden" value="@i" name="totalNo" />
+                                        <!-- slide end-->
+                                        @*<div class="carousel-item">2
+                    </div>
+                    <div class="carousel-item">3
+                    </div>*@
+
+                                    </div>
+
+                                    <!-- <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a> -->
+                                            if (Model.ExamList.Count <= 1)
+                                            {
+                                                <a class="my_setting_savechange_btn btn btn-thm mgtop padding22" href="#" style="cursor:not-allowed" role="button" data-slide="next">
+                                                    Next 
+                                                    <span class="sr-only">Next</span>
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <div id="next">
+                                                    <a onclick="changenumber()" class="my_setting_savechange_btn btn btn-thm mgtop padding22" href="#carouselExampleIndicators" role="button" data-slide="next">
+                                                        Next
+                                                        <span class="sr-only">Next</span>
+                                                    </a>
+                                                </div>
+                                            }
+
+
+                                    <div class="clear"></div>
+
+                              
+ 
+                                <button type="submit" class="my_setting_savechange_btn btn btn-thm mgtop padding22">End Test</button>
+                                }
+
+                                     
+                                </div>
+
+                                <div class="clear"></div>
+                            </div> 
+                    </div> 
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>

@@ -1,0 +1,54 @@
+﻿@using PagedList.Mvc
+@model Exellenece.Models.Board1
+@{
+    Layout = null; 
+}
+ 
+<div class="card-body table-responsive" style="display: block;">
+    <!--bigtable -->
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th width="14%">Sr.No.</th>
+                <th width="64%">Enter Board Name</th>
+                <th width="9%">Status</th>
+                <th width="7%">Edit</th>
+                <th width="6%">Remove</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{int i = 0;
+                int a = Model.BoardList1.PageNumber;
+                if (a == 0)
+                {
+                    a = 1;
+                }
+                else
+                {
+                    a = ((a * 10) - 9);
+                }
+            }
+@foreach (var item in Model.BoardList1)
+{
+
+            <tr>
+                <td>@a</td>
+                <td>@item.Board_Name</td>
+
+                <td><a href="#"><strong>@item.Status</strong></a> </td> 
+                <td><a href="/Manage/board/@item.Id?command=ed" class="red">Edit</a></td>
+                <td><a href="/Manage/board/@item.Id?command=del"><i class="fa fa-trash"></i></a></td>
+
+
+            </tr>
+    a = a + 1;
+   
+}  
+
+        </tbody>
+    </table>
+
+    <div class="pagination pagination-sm float-right paging">
+        @Html.PagedListPager(Model.BoardList1, page1 => Url.Action("board", new { page1 }))
+    </div>  
+</div>

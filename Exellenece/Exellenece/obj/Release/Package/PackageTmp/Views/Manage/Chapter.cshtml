@@ -1,0 +1,199 @@
+﻿@model Exellenece.Models.Chapter1
+@{
+    ViewBag.Title = "Chapter";
+    Layout = "~/Views/Shared/_LayoutManage.cshtml";
+}
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0 text-dark">Chapter</h1>
+                    @if (TempData["Err"] != null)
+                    {
+                        <div style="font-size:14px; ">
+                            <div class="alert alert-danger alert-dismissible">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                <strong>Error!! </strong>@TempData["Err"]
+                            </div>
+                        </div>
+                    }
+                    @if (TempData["Succ"] != null)
+                    {
+                        <div style="font-size:14px; ">
+                            <div class="alert alert-success alert-dismissible">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                <strong>Success!! </strong>@TempData["Succ"]
+                            </div>
+                        </div>
+                    }
+                </div>
+                <!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="/Manage/dashboard">Home</a></li>
+                        <li class="breadcrumb-item active">Chapter</li>
+                    </ol>
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <!-- Small boxes (Stat box) -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">Form</h3>
+
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="" data-original-title="Collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        @using (Html.BeginForm("Chapter", "Manage", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                        {
+                            <div class="card-body">
+                                <div class="row">
+
+
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="inputName">Select Boards</label>
+                                            @if (ViewBag.btn == "Update")
+                                            {
+                                                @Html.DropDownListFor(model => model.Board_Id, new SelectList(Model.BoardList, "Id", "Board_Name"), "Select Board", new { @class = "form-control", id = "boardid" })
+
+                                            }
+                                            else
+                                            {
+                                                @Html.DropDownListFor(model => model.Board_Id, new SelectList(Model.BoardList, "Id", "Board_Name"), "Select Board", new { @class = "form-control", id = "boardid" })
+                                            }
+                                            <span>@Html.ValidationMessageFor(model => model.Board_Id)</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="inputName">Select Class</label>
+                                            @if (ViewBag.btn == "Update")
+                                            {
+                                                @Html.DropDownListFor(model => model.Class_Id, new SelectList(Model.ClassList, "Id", "Class_Name"), "Select Class", new { @class = "form-control", id = "classid" })
+
+                                            }
+                                            else
+                                            {
+                                                @Html.DropDownListFor(model => model.Class_Id, new SelectList(Model.ClassList, "Id", "Class_Name"), "Select Class", new { @class = "form-control", id = "classid" })
+                                            }
+                                            <span>@Html.ValidationMessageFor(model => model.Class_Id)</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="inputName">Select Subjects</label>
+                                            @if (ViewBag.btn == "Update")
+                                            {
+                                                @Html.DropDownListFor(model => model.Subject_Id, new SelectList(Model.SubjectList, "Id", "Subject_Name"), "Select Subject", new { @class = "form-control", id = "subjectid" })
+
+                                            }
+                                            else
+                                            {
+                                                @Html.DropDownListFor(model => model.Subject_Id, new SelectList(Model.SubjectList, "Id", "Subject_Name"), "Select Subject", new { @class = "form-control", id = "subjectid" })
+                                            }
+                                            <span>@Html.ValidationMessageFor(model => model.Subject_Id)</span>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="inputName">Chapter Video</label>
+                                            @{
+                                                if (ViewBag.btn == "Update")
+                                                {
+                                                    <input class="form-control" type="file" multiple="multiple" name="files[0]" id="files_1" />
+                                                    if (ViewBag.img1 != null)
+                                                    {
+                                                        if (ViewBag.img1 != "image-not-available.jpg")
+                                                        {
+                                                            <span style="margin:10px;">@ViewBag.img1</span>
+                                                            <input class="form-control" type="hidden" id="BannerImage1" value="@ViewBag.img1" />
+                                                        }
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    @Html.TextBoxFor(Model => Model.file1, new { @class = "form-control", type = "file", id = "file1" })
+                                                }
+                                            }
+                                        </div>
+                                    </div>
+
+                                </div><!-- row end -->
+
+
+                                <div class="form-group">
+                                    <label for="inputName">Enter Chapter Heading</label>
+                                    @Html.TextAreaFor(Model => Model.Chapter_Heading, new { @style = "min-height: 50px;", @class = "form-control" })
+                                    <span>@Html.ValidationMessageFor(model => model.Chapter_Heading)</span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputName">Chapter Content</label>
+                                    @Html.TextAreaFor(model => model.Chapter_Content, new { style = "min-height: 350px;", id = "Description", @class = "ckeditor", cols = "40", rows = "2" })
+
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label for="inputName">Active/Deactive</label>
+                                    @Html.DropDownListFor(x => x.Status, new List<SelectListItem>
+                                {
+                                                     new SelectListItem() {Text = "Active", Value="Active"},
+                                                     new SelectListItem() {Text = "Deactive", Value="Deactive"},
+
+                                }, "Select Status", new { @class = "form-control" })
+                                    <span>@Html.ValidationMessageFor(model => model.Status)</span>
+                                </div>
+                                <div class="form-group">
+                                    @if (ViewBag.btn == "Update")
+                                    {
+                                        <input type="submit" value="Update" class="btn btn-success float-right" name="cmd" />
+                                    }
+                                    else
+                                    {
+                                        <input type="submit" value="Submit" class="btn btn-success float-right" name="cmd" />
+                                    }
+                                </div>
+
+                            </div>
+                                                }
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+            </div>
+            <!-- /.row -->
+            <!-- Main row -->
+            <div class="row">
+                <!-- Left col -->
+                <div class="col-md-12">
+                    @{
+                        Html.RenderAction("_chapterview", new { page = @ViewBag.Type });
+                    }
+                    <!-- /.card-body -->
+                </div>
+            </div>
+            <!-- /.row (main row) -->
+        </div>
+        <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>

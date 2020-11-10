@@ -1,0 +1,100 @@
+﻿@using PagedList.Mvc
+@model Exellenece.Models.Register1
+    @{
+        ViewBag.Title = "registereduser";
+        Layout = "~/Views/Shared/_LayoutManage.cshtml";
+    }
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1 class="m-0 text-dark">Registered User</h1>
+                    </div>
+                    <!-- /.col -->
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="/Manage/dashboard">Home</a></li>
+
+                            <li class="breadcrumb-item active">Registered User</li>
+                        </ol>
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.container-fluid -->
+        </div>    <!-- /.content-header -->
+        <!-- Main content -->
+        <!--bigtable -->
+        <div class="card-body table-responsive" style="display: block;">
+
+            <table class="table bigtable table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>Sr.No.</th>
+                        @*<th>Date</th>*@
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Password</th>
+                        <th>Mobile</th>
+                        <th>Area Pin</th>
+                        <th>Board</th>
+                        <th>Class</th>
+                        <th>Login Type</th>
+                        @*<th>Package</th>
+                            <th>Status</th>
+                            <th>Edit</th>
+                            <th>Remove</th>*@
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @{int i = 0;
+                        int a = Model.RegisterList1.PageNumber;
+                        if (a == 0)
+                        {
+                            a = 1;
+                        }
+                        else
+                        {
+                            a = ((a * 50) - 49);
+                        }
+                    }
+                    @foreach (var item in Model.RegisterList1)
+                    {
+                        <tr>
+                            <td>@a</td>
+                            <td>@item.Name</td>
+                            <td>@item.Email</td>
+                            <td>@item.Password</td>
+
+                            <td>@item.Mobile_No</td>
+                            <td>@item.Pin_Code</td>
+
+                            <td>@item.Board_Name</td>
+                            <td>@item.Class_Name</td>
+                            <td>@item.Type</td>  
+                            @*<td>&nbsp;</td>
+
+                                <td><a href="#"><strong>Active</strong></a> </td>
+
+                                <td><a href="#" class="red">Edit</a></td>
+                                <td><a href="#"><i class="fa fa-trash"></i></a></td>*@
+
+
+                        </tr>
+                    }
+
+
+
+                </tbody>
+            </table>
+
+
+            <div class="pagination-outer float-right paging">
+                @Html.PagedListPager(Model.RegisterList1, page1 => Url.Action("registereduser", new { page1 }))
+            </div>
+        </div>
+    </div>

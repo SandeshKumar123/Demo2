@@ -1,0 +1,225 @@
+﻿@model Exellenece.Models.Exam1
+@{
+    ViewBag.Title = "AddQuestion";
+    Layout = "~/Views/Shared/_LayoutManage.cshtml";
+}
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0 text-dark">Question</h1> 
+                </div>
+                <!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">Question</li>
+                    </ol>
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <!-- Small boxes (Stat box) -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">Form</h3>
+                           
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="" data-original-title="Collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        @using (Html.BeginForm("Exam", "Manage", FormMethod.Post))
+                        {
+                            <div class="card-body">
+                                <div class="row">
+                                    <h3>@ViewBag.Board   @ViewBag.Class   @ViewBag.Subject @ViewBag.Chapter</h3>
+
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label for="inputName">Question</label>
+                                            @Html.TextAreaFor(model => model.Question, new { style = "min-height: 350px;", id = "Description", @class = "ckeditor", cols = "40", rows = "2" })
+
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="inputName">Answer A</label>
+                                            @Html.TextBoxFor(Model => Model.Answer_A, new { @style = "height: 60px", @class = "form-control" })
+                                            <span>@Html.ValidationMessageFor(model => model.Answer_A)</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="inputName">Answer B</label>
+                                            @Html.TextBoxFor(Model => Model.Answer_B, new { @style = "height: 60px", @class = "form-control" })
+                                            <span>@Html.ValidationMessageFor(model => model.Answer_B)</span>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="inputName">Answer C</label>
+                                            @Html.TextBoxFor(Model => Model.Answer_C, new { @style = "height: 60px", @class = "form-control" })
+                                            <span>@Html.ValidationMessageFor(model => model.Answer_C)</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="inputName">Answer D</label>
+                                            @Html.TextBoxFor(Model => Model.Answer_D, new { @style = "height: 60px", @class = "form-control" })
+                                            <span>@Html.ValidationMessageFor(model => model.Answer_D)</span>
+                                        </div>
+                                    </div>
+                                    
+
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label for="inputName">Answer Description</label>
+                                            @Html.TextAreaFor(Model => Model.Answer_Description, new { @style = "min-height: 50px;", @class = "form-control" })
+                                            <span>@Html.ValidationMessageFor(model => model.Answer_Description)</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+
+                                        <div class="form-group">
+                                            <label for="inputName">Right Answer</label>
+                                            @Html.DropDownListFor(x => x.Right_Answer, new List<SelectListItem>
+                                {
+                                                     new SelectListItem() {Text = "Answer A", Value="Answer A"},
+                                                     new SelectListItem() {Text = "Answer B", Value="Answer B"},
+                                                     new SelectListItem() {Text = "Answer C", Value="Answer C"},
+                                                     new SelectListItem() {Text = "Answer D", Value="Answer D"},
+
+                                }, "Select Right Answer", new { @class = "form-control" })
+                                            <span>@Html.ValidationMessageFor(model => model.Right_Answer)</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="inputName">Active/Deactive</label>
+                                            @Html.DropDownListFor(x => x.Status, new List<SelectListItem>
+                                {
+                                                     new SelectListItem() {Text = "Active", Value="Active"},
+                                                     new SelectListItem() {Text = "Deactive", Value="Deactive"},
+
+                                }, "Select Status", new { @class = "form-control" })
+                                            <span>@Html.ValidationMessageFor(model => model.Status)</span>
+                                        </div>
+                                    </div>
+                                    </div><!-- row end -->
+
+                                <div class="form-group">
+                                    @if (ViewBag.btn == "Update")
+                                    {
+                                        <input type="submit" value="Update" class="btn btn-success float-right" name="cmd" />
+                                    }
+                                    else
+                                    {
+                                        <input type="submit" value="Submit" class="btn btn-success float-right" name="cmd" />
+                                    }
+                                </div>
+                            </div>
+                        }
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+            </div>
+            <!-- /.row -->
+            <!-- Main row -->
+            <div class="row">
+                <!-- Left col -->
+                <div class="col-md-12">
+                    <div class="card card-primary">
+                        <!--bigtable -->
+                        <!-- <div class="card-body table-responsive" style="display: block;">
+
+                                       <table class="table table-striped table-hover">
+                                                         <thead>
+                                                           <tr>
+
+
+
+
+
+
+
+                                                            <th width="3%">Sr.No.</th>
+                                                             <th width="12%" >Select Board</th>
+                                                             <th width="16%">Select Class</th>
+                                                             <th width="14%">Select Subject</th>
+                                                            <th width="20%"> Select Chapter</th>
+
+                                                             <th width="4%">Status</th>
+                                                             <th width="2%">Edit</th>
+                                                             <th width="5%">Remove</th>
+                                                           </tr>
+                                                         </thead>
+                                                         <tbody>
+                                                           <tr>
+                                                                   <td>1</td>
+                                                                   <td>CBSC</td>
+                                                                   <td>------------------</td>
+
+                                                                   <td>&nbsp;</td>
+                                                                   <td>&nbsp;</td>
+                                                                   <td><a href="#"><strong>Active</strong></a> </td>
+
+                                                                   <td><a href="#" class="red">Edit</a></td>
+                                                                   <td><a href="#"><i class="fa fa-trash"></i></a></td>
+
+
+                                                             </tr>
+                                                           <tr>
+                                                               <td>2</td>
+                                                                   <td>-----</td>
+                                                                   <td>-----</td>
+                                                                   <td>----------------</td>
+
+                                                                   <td>&nbsp;</td>
+
+                                                                   <td><a href="#"><strong>Active</strong></a> </td>
+
+                                                                   <td><a href="#" class="red">Edit</a></td>
+                                                                   <td><a href="#"><i class="fa fa-trash"></i></a></td>
+                                                           </tr>
+                                                         </tbody>
+                                       </table>
+
+                                       <ul class="pagination pagination-sm float-right paging">
+                                         <li class="page-item"><a class="page-link" href="#">«</a></li>
+                                               <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                               <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                               <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                               <li class="page-item"><a class="page-link" href="#">»</a></li>
+                                       </ul>
+
+
+                                   </div>  -->
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+            </div>
+            <!-- /.row (main row) -->
+        </div>
+        <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>

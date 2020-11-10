@@ -1,0 +1,67 @@
+﻿@using PagedList.Mvc
+@model Exellenece.Models.Chapter1
+@{
+    Layout = null;
+}
+ 
+<div class="card-body table-responsive" style="display: block;">
+    <!--bigtable -->
+    <table class="table bigtable table-striped table-hover">
+        <thead>
+            <tr>
+
+
+
+
+
+
+
+                <th width="3%">Sr.No.</th>
+                <th width="12%">Board Name</th>
+                <th width="16%">Class Name</th>
+                <th width="14%">Subject Name</th>
+                <th width="20%">Chapter Heading</th> 
+                <th width="13%">Chapter Video</th>
+                <th width="4%">Status</th>
+                <th width="2%">Edit</th>
+                <th width="5%">Remove</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{int i = 0;
+                int a = Model.ChapterList1.PageNumber;
+                if (a == 0)
+                {
+                    a = 1;
+                }
+                else
+                {
+                    a = ((a * 50) - 49);
+                }
+            }
+            @foreach (var item in Model.ChapterList1)
+            {
+                <tr>
+                    <td>@a</td>
+                    <td>@item.Board_Name </td>
+                    <td>@item.Class_Name</td>
+                    <td>@item.Subject_Name</td>
+                    <td>@item.Chapter_Heading</td> 
+                    <td>@item.Chapter_Video</td>
+                <td><a href="#"><strong>@item.Status</strong></a> </td>
+                <td><a href="/Manage/Chapter/@item.Id?command=ed" class="red">Edit</a></td>
+                <td><a href="/Manage/Chapter/@item.Id?command=del"><i class="fa fa-trash"></i></a></td>
+
+
+            </tr>
+                a = a + 1;
+            }
+        </tbody>
+    </table>
+
+    <div class="pagination-outer float-right paging">
+        @Html.PagedListPager(Model.ChapterList1, page1 => Url.Action("Chapter", new { page1 }))
+    </div>
+
+
+</div>

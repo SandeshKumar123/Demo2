@@ -1,0 +1,66 @@
+﻿@using PagedList.Mvc
+@model Exellenece.Models.Exam1
+@{
+    Layout = null;
+}
+ 
+<div class="card-body table-responsive" style="display: block;">
+    <!--bigtable -->
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th width="3%">Sr.No.</th>
+                <th width="12%">Board</th>
+                <th width="12%">Class</th> 
+                <th width="12%">Subject</th>
+                <th width="12%">Answer A</th>
+                <th width="16%">Answer B</th>
+                <th width="14%">Answer C</th>
+                <th width="10%"> Answer D</th>
+                <th width="10%">Right Answer</th>
+                <th width="4%">Status</th>
+                <th width="2%">Edit</th>
+                <th width="5%">Remove</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{int i = 0;
+                int a = Model.ExamList1.PageNumber;
+                if (a == 0)
+                {
+                    a = 1;
+                }
+                else
+                {
+                    a = ((a * 50) - 49);
+                }
+            }
+            @foreach (var item in Model.ExamList1)
+            { 
+                <tr>
+                    <td>@a</td>
+                    <td>@item.Board_Name </td>
+                    <td>@item.Class_Name </td>
+                    <td>@item.Subject_Name</td>
+                    <td>@item.Answer_A </td>
+                    <td>@item.Answer_B </td> 
+                    <td>@item.Answer_C </td>
+                    <td>@item.Answer_D </td>
+                    <td>@item.Right_Answer</td> 
+
+                    <td><a href="#"><strong>@item.Status</strong></a> </td>
+                    <td><a href="/Manage/Exam/@item.Id?command=ed" class="red">Edit</a></td>
+                    <td><a href="/Manage/Exam/@item.Id?command=del"><i class="fa fa-trash"></i></a></td>
+
+
+                </tr>
+                a = a + 1;
+            }
+
+        </tbody>
+    </table>
+
+    <div class="pagination-outer float-right paging">
+        @Html.PagedListPager(Model.ExamList1, page1 => Url.Action("Exam", new { page1 }))
+    </div>
+</div>

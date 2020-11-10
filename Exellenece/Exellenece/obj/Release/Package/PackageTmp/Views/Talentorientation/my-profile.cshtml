@@ -1,0 +1,125 @@
+﻿@model Exellenece.Models.Register1
+@{
+    ViewBag.Title = "myprofile";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+<section class="inner_page_breadcrumb dashboard">
+    <div class="container">
+        <div class="row">
+
+        </div>
+    </div>
+</section>
+
+<!-- About Text Content -->
+<section class="about-section">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 col-lg-2 col-xl-2 post2 hidden2">
+                <div class="side-heading">
+                    <i class="fa fa-book"></i> Student Panel
+                    <div class="clear"></div>
+                </div>
+
+
+                @{
+                    Html.RenderAction("_BindLeftMenu");
+                }
+
+
+
+
+            </div>
+
+            <div class="col-md-12 col-lg-10 col-xl-10">
+                <nav class="breadcrumb_widgets" aria-label="breadcrumb mb30">
+                    <h4 class="title float-left">My Profile</h4>
+                    <ol class="breadcrumb float-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">My Profile</li>
+                    </ol>
+
+                    <div class="clear"></div>
+                </nav>
+
+                <div class="row">
+
+
+                    <div class="col-md-12">
+                        <div class="background22">
+
+                            <div class="fl-left">
+                                <div class="user-id">Name</div>
+                                <div class="colone">:</div>
+                                <div class="form-right">@Model.Name</div>
+                                <div class="clear"></div>
+                            </div>
+
+                            <div class="fl-left">
+                                <div class="user-id">Email</div>
+                                <div class="colone">:</div>
+                                <div class="form-right">@Model.Email</div>
+                                <div class="clear"></div>
+                            </div>
+
+                            <div class="fl-left">
+                                <div class="user-id">Mobile No</div>
+                                <div class="colone">:</div>
+                                <div class="form-right">@Model.Mobile_No</div>
+                                <div class="clear"></div>
+                            </div>
+
+                            <div class="fl-left">
+                                <div class="user-id">Board</div>
+                                <div class="colone">:</div>
+                                <div class="form-right">@Model.Board_Name </div>
+                                <div class="clear"></div>
+                            </div>
+
+                            <div class="fl-left">
+                                <div class="user-id">Class</div>
+                                <div class="colone">:</div>
+                                <div class="form-right">@Model.Class_Name</div>
+                                <div class="clear"></div>
+                            </div>
+
+                            <div class="fl-left">
+                                <div class="user-id">Pin code</div>
+                                <div class="colone">:</div>
+                                <div class="form-right">@Model.Pin_Code</div>
+                                <div class="clear"></div>
+                            </div>
+
+
+
+                            <!-- <div class="fl-left">
+                             <div class="user-id">Pincode</div>
+                             <div class="colone">:</div>
+                             <div class="form-right">110091</div>
+                             <div class="clear"></div>
+                             </div>
+
+                             <div class="fl-left">
+                             <div class="user-id">Address</div>
+                             <div class="colone">:</div>
+                             <div class="form-right"> Dummy Address </div>
+                             <div class="clear"></div>
+                             </div>-->
+
+                            <div class="my_setting_savechange_btn btn btn-thm pull-right">Edit Profile</div>
+
+                            <div class="clear"></div>
+                        </div>
+
+                    </div>
+
+
+
+
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>

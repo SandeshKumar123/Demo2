@@ -1,0 +1,134 @@
+﻿.field-validation-error {
+    font-size: 12px;
+    color: #a00;
+    font-weight: bold;
+    font-style: italic; 
+} 
+.field-validation-valid {
+    display: none;
+} 
+.input-validation-error {
+    border: 1px solid #a00 !important;
+    background-color: #ffeeee !important;
+}  
+.validation-summary-errors {
+    font-weight: bold;
+    color: #ff0000;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+
+textarea.input-validation-error { 
+    border: 1px solid #e80c4d; 
+}
+.alert-danger {
+	color: #a94442;
+	background-color: #f2dede;
+	border-color: #ebccd1 
+}
+.alert-danger hr {
+	border-top-color: #e4b9c0
+}
+.alert-danger .alert-link {
+	color: #843534
+}.alert-dismissable, .alert-dismissible {
+	padding-right: 35px
+}
+.alert-dismissable .close, .alert-dismissible .close {
+	position: relative;
+	top: -2px;
+	right: 0px;
+	color: inherit
+}
+.alert-success {
+	color: #3c763d;
+	background-color: #dff0d8;
+	border-color: #d6e9c6
+}
+.alert-success hr {
+	border-top-color: #c9e2b3
+}
+.alert-success .alert-link {
+	color: #2b542c
+}
+.close {
+	float: right;
+	font-size: 21px;
+	font-weight: 700;
+	line-height: 1;
+	color: #000;
+	text-shadow: 0 1px 0 #fff;
+	filter: alpha(opacity=20);
+	opacity: .2
+}
+.close:focus, .close:hover {
+	color: #000;
+	text-decoration: none;
+	cursor: pointer;
+	filter: alpha(opacity=50);
+	opacity: .5
+}
+button.close {
+	-webkit-appearance: none;
+	padding: 0;
+	cursor: pointer;
+	background: 0 0;
+	border: 0
+}
+.alert {
+	padding: 15px;
+	margin-bottom: 20px;
+	border: 1px solid transparent;
+	border-radius: 4px
+}
+.alert h4 {
+	margin-top: 0;
+	color: inherit
+}
+.alert .alert-link {
+	font-weight: 700
+}
+.alert>p, .alert>ul {
+	margin-bottom: 0
+}
+.alert>p+p {
+	margin-top: 5px
+}
+.text-success {
+	color: #3c763d
+}
+a.text-success:focus, a.text-success:hover {
+	color: #2b542c
+}
+.alert-success {
+	color: #3c763d;
+	background-color: #dff0d8;
+	border-color: #d6e9c6
+}
+.alert-success hr {
+	border-top-color: #c9e2b3
+}
+.alert-success .alert-link {
+	color: #2b542c
+}
+ .pagination > li > a, .pagination > li > span {
+        position: relative;
+        float: left;
+        padding: 6px 12px;
+        margin-left: -1px;
+        line-height: 1.42857143;
+        color: #337ab7;
+        text-decoration: none;
+        background-color: #fff;
+        border: 1px solid #ddd;
+    }
+
+    .pagination > .active > a, .pagination > .active > a:focus, .pagination > .active > a:hover, .pagination > .active > span, .pagination > .active > span:focus, .pagination > .active > span:hover {
+        z-index: 2;
+        color: #fff;
+        cursor: default;
+        background-color: #337ab7;
+        border-color: #337ab7;
+    }

@@ -1,0 +1,95 @@
+﻿@model Exellenece.Models.Exam1
+@{
+    ViewBag.Title = "chapters";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+<!-- Inner Page Breadcrumb -->
+<section class="inner_page_breadcrumb dashboard">
+    <div class="container">
+        <div class="row">
+
+        </div>
+    </div>
+</section>
+
+<!-- About Text Content -->
+<section class="about-section">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 col-lg-2 col-xl-2 post2 hidden2">
+                <div class="side-heading">
+                    <i class="fa fa-book"></i> Student Panel
+                    <div class="clear"></div>
+                </div>
+
+
+                @{
+                    Html.RenderAction("_BindLeftMenu");
+                }
+                 
+            </div>
+
+            <div class="col-md-12 col-lg-10 col-xl-10">
+                <nav class="breadcrumb_widgets" aria-label="breadcrumb mb30">
+                    <h4 class="title float-left">@ViewBag.Board_Name - @ViewBag.Clas_Name-@ViewBag.Subject_Name</h4>
+                    <ol class="breadcrumb float-right">
+                        <li class="breadcrumb-item"><a href="/Manage/dashboard">Home</a></li>
+                        <li class="breadcrumb-item"><a href="#">My Courses</a></li> 
+                        <li class="breadcrumb-item"><a href="#">@ViewBag.Board_Name</a></li>  
+                        <li class="breadcrumb-item"><a href="#">@ViewBag.Clas_Name</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">@ViewBag.Subject_Name</li>
+                    </ol>
+
+                    <div class="clear"></div>
+                </nav>
+
+                <div class="row">
+
+
+                    <div class="col-md-12">
+                        @{int i = 1;}
+                        @foreach (var item in Model.ChapterList)
+                        {
+                            <div class="box-d22">
+                                <div class="box-2inner">
+                                    <h1> Chapter @i</h1>
+
+                                    <p>@item.Chapter_Heading</p>
+                                    @if (item.Chapter_Heading.Length > 100)
+                                    {
+                                        <a href="/chapter-detail/@item.Chapter_Heading.Replace(" ", "-").Replace("~", "-").Replace("!", "-").Replace("&", "-").Replace("?", "-").Replace("%", "-").Replace(".", "-").Replace("/", "-").Replace(":", "-").Replace("+", "-").Replace(",", "-").Replace("'", "-").Replace(",", "-").Replace("`", "-").Substring(0,100)-@item.Id" class="view-details">View Details <i class="fa fa-arrow-circle-right"></i></a>
+
+                                    }
+                                    else
+                                    {
+                                        <a href="/chapter-detail/@item.Chapter_Heading.Replace(" ", "-").Replace("~", "-").Replace("!", "-").Replace("&", "-").Replace("?", "-").Replace("%", "-").Replace(".", "-").Replace("/", "-").Replace(":", "-").Replace("+", "-").Replace(",", "-").Replace("'", "-").Replace(",", "-").Replace("`", "-")-@item.Id" class="view-details">View Details <i class="fa fa-arrow-circle-right"></i></a>
+
+ 
+                                    }
+
+                                    
+                                    <div class="clear"></div>
+                                </div>
+
+                                 
+
+                            </div>
+                            i = i + 1;
+                        }
+                        
+
+                         
+
+
+                    </div>
+
+
+
+
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>

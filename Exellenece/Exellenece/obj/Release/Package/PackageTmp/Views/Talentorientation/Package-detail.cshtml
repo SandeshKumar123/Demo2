@@ -1,0 +1,105 @@
+﻿@model Exellenece.Models.Exam1
+@{
+    ViewBag.Title = "Packagedetails";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+<!-- Inner Page Breadcrumb -->
+<section class="inner_page_breadcrumb dashboard">
+    <div class="container">
+        <div class="row"> </div>
+    </div>
+</section>
+
+<!-- About Text Content -->
+<section class="about-section">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 col-lg-2 col-xl-2 post2 hidden2">
+                <div class="side-heading">
+                    <i class="fa fa-book"></i> Student Panel
+                    <div class="clear"></div>
+                </div>
+                @{
+                    Html.RenderAction("_BindLeftMenu");
+                }
+
+            </div>
+            <div class="col-md-12 col-lg-10 col-xl-10">
+                <nav class="breadcrumb_widgets" aria-label="breadcrumb mb30">
+                    <h4 class="title float-left">@Model.FullData.ElementAt(0).Package_Heading</h4>
+                    <ol class="breadcrumb float-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item"><a href="#">Package</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">@Model.FullData.ElementAt(0).Package_Heading</li>
+                    </ol>
+                    <div class="clear"></div>
+                </nav>
+                <div class="packagecont2">
+@foreach (var item in Model.FullData)
+{
+                    <div class="row">
+
+                        <div class="col-sm-12 col-md-8">
+                           
+                                <div class="col-sm-12 col-md-8">
+                                    <label class="packagelabel2">
+                                        <input type="checkbox" name="" hidden="hidden" checkouttext="All Subjects" value="opt0" checked="true">
+                                        <span class="checkbox2"></span>
+                                        <div class="inline-block2 addOns2">
+                                            @item.Package_Heading<span>(@item.Package_Sub_Heading)</span>
+                                        </div><div class="inline-block2  pull-right addOnsPrice2">
+                                            @if (item.Package_Discount_Price == item.Package_Price)
+                                            {
+
+                                                <i class="mn-rupee mnPrice"></i>@item.Package_Price
+                                            }
+                                            else
+                                            {
+                                                double TotalDis;
+                                                double DidPer = 0;
+                                                double save = 0;
+                                                if (item.Package_Discount_Price != 0)
+                                                {
+                                                    TotalDis = item.Package_Price - item.Package_Discount_Price;
+                                                    DidPer = TotalDis * 100 / item.Package_Price;
+                                                    DidPer = Math.Round(DidPer, 0);
+                                                }
+                                                save = item.Package_Price - item.Package_Discount_Price;
+                                                <i class="mn-rupee mnPrice"></i>@item.Package_Discount_Price
+                                                <i class="mn-rupee delPrice"></i> <del>@item.Package_Price</del><span style="display:none"><i class="mn-rupee"></i> 768/month</span>
+                                                <small>You Save <i class="mn-rupee"></i>@save (@DidPer%)</small>
+                                            }
+
+                                        </div>
+                                    </label>
+                                </div>
+                            }
+                            <!-- end -->
+                        </div>
+
+                        @using (Html.BeginForm("process", "Talentorientation", FormMethod.Post))
+                        {
+                            @Html.HiddenFor(c => c.Combo_Type, new { @Value = item.Combo_Type })
+
+                            @Html.HiddenFor(c => c.Class_Name, new { @Value = item.Package_Heading })
+
+                            @Html.HiddenFor(c => c.Id, new { @Value = item.Id })
+
+
+                            @Html.HiddenFor(c => c.Price, new { @Value = item.Package_Price })
+
+                            @Html.HiddenFor(c => c.Discount_Price, new { @Value = item.Package_Discount_Price })
+                            <div class="col-sm-12 col-md-4" style="position: relative;">
+                                <button class="packagebtn1" type="submit">Buy Now</button>
+
+                            </div>
+                        }
+                    </div> 
+                        } 
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</section>

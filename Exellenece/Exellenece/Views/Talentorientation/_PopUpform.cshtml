@@ -1,0 +1,93 @@
+﻿@model Exellenece.Models.Register1
+@Html.AntiForgeryToken()
+@{
+    Layout = null;
+}
+@if (ViewBag.Err != null)
+{
+    <div class="col-md-12 col-sm-12 col-lg-12">
+        <div class="alert alert-danger alert-dismissible">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>Error!! </strong>@ViewBag.Err
+        </div>
+    </div>
+}
+@if (ViewBag.Succ != null)
+{
+    <div class="col-md-12 col-sm-12 col-lg-12">
+        <div class="alert alert-success alert-dismissible">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>Success!! </strong>@ViewBag.Succ
+        </div>
+    </div>
+}
+<div class="row">
+    <div class="col-sm-6 pr0">
+        <div class="form-group">
+            @Html.TextBoxFor(Model => Model.Name, new { @placeholder = "Enter name", @class = "form-control" })
+            <span>@Html.ValidationMessageFor(model => model.Name)</span>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="form-group">
+            @Html.TextBoxFor(Model => Model.Email, new { @placeholder = "Enter E-mail", @class = "form-control" })
+            <span>@Html.ValidationMessageFor(model => model.Email)</span>
+        </div>
+    </div>
+
+    <div class="col-sm-6 pr0">
+        <div class="form-group">
+            @Html.PasswordFor(Model => Model.Password, new { @placeholder = "Enter password", @class = "form-control" })
+            <span>@Html.ValidationMessageFor(model => model.Password)</span>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="form-group">
+            @Html.PasswordFor(Model => Model.Confirm_password, new { @placeholder = "Confirm password", @class = "form-control" })
+            <span>@Html.ValidationMessageFor(model => model.Confirm_password)</span>
+        </div>
+    </div>
+    <div class="col-sm-6 pr0">
+        <div class="form-group">
+            @Html.TextBoxFor(Model => Model.Pin_Code, new { @placeholder = "Area Pin Code", @class = "form-control" })
+            <span>@Html.ValidationMessageFor(model => model.Pin_Code)</span>
+        </div>
+    </div>
+
+    <div class="col-sm-6">
+        <div class="form-group">
+            @Html.TextBoxFor(Model => Model.Mobile_No, new { @placeholder = "Mobile No.", @class = "form-control" })
+            <span>@Html.ValidationMessageFor(model => model.Mobile_No)</span>
+        </div>
+    </div>
+
+    <div class="col-sm-6 pr0">
+        @Html.DropDownListFor(model => model.Board_Id, new SelectList(Model.BoardList, "Id", "Board_Name"), "Select Board", new { @class = "form-control", id = "boardid" })
+
+        <span>@Html.ValidationMessageFor(model => model.Board_Id)</span>
+    </div>
+
+    <div class="col-sm-6">
+        @Html.DropDownListFor(model => model.Class_Id, new SelectList(Model.ClassList, "Id", "Class_Name"), "Select Class", new { @class = "form-control", id = "classid" })
+        <span>@Html.ValidationMessageFor(model => model.Class_Id)</span>
+    </div>
+
+    <div class="col-sm-4">
+        <label data-type="Student" class="radio-btn"> 
+            @Html.RadioButtonFor(model => model.Type, "Student") Student 
+        </label>
+    </div>
+
+    <div class="col-sm-4">
+        <label data-type="Student" class="radio-btn">
+            @Html.RadioButtonFor(model => model.Type, "Parent") Parent
+        </label>
+    </div>
+    <div class="col-sm-4">
+        <label data-type="Student" class="radio-btn">
+
+            @Html.RadioButtonFor(model => model.Type, "Teacher") Teacher
+        </label>
+    </div>
+    <span style="margin-left:39%;">@Html.ValidationMessageFor(model => model.Type)</span>
+</div>

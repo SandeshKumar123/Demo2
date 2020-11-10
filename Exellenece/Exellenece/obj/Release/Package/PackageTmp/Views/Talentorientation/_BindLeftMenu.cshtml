@@ -1,0 +1,76 @@
+﻿@model Exellenece.Models.Exam1
+<nav class="mainNav">
+    <ul>
+        <!--class="selected"-->
+        <li><a href="/dashboard" class="@TempData["Dash"]">Dashboard</a></li>
+        <li><a href="/my-profile" class="@TempData["pro"]">My Profile</a></li>
+        <li><a href="/change-password" class="@TempData["pass"]">Change Password</a></li>
+        <li>
+            <a href="#" class="@TempData["courses"]">My Courses</a>
+            @foreach (var item in Model.ClassList)
+            {
+                <ul>
+                    <li>
+                        <a href="#">@item.Class_Name</a>
+                        <ul>
+                            @foreach (var item1 in Model.SubjectList)
+                            {
+                                <li>
+                                    <a href="/chapters/@item1.Subject_Name.Replace(" ", "-").Replace("~", "-").Replace("!", "-").Replace("&", "-").Replace("?", "-").Replace("%", "-").Replace(".", "-").Replace("/", "-").Replace(":", "-").Replace("+", "-").Replace(",", "-").Replace("'", "-").Replace(",", "-").Replace("`", "-")"> @item1.Subject_Name</a>
+
+                                    @*<ul>
+                                        @foreach (var item2 in Model.ChapterList)
+                                        {
+                                            if (item1.Id == item2.Subject_Id)
+                                            {
+                                                if (item2.Chapter_Heading.Length > 100)
+                                                {
+                                                    <li><a href="/chapter-detail/@item2.Chapter_Heading.Replace(" ", "-").Replace("~", "-").Replace("!", "-").Replace("&", "-").Replace("?", "-").Replace("%", "-").Replace(".", "-").Replace("/", "-").Replace(":", "-").Replace("+", "-").Replace(",", "-").Replace("'", "-").Replace(",", "-").Replace("`", "-").Substring(0,100)-@item2.Id" style="color:#4cff00"> @item2.Chapter_Heading</a></li>
+
+                                                }
+                                                else
+                                                {
+                                                    <li><a href="/chapter-detail/@item2.Chapter_Heading.Replace(" ", "-").Replace("~", "-").Replace("!", "-").Replace("&", "-").Replace("?", "-").Replace("%", "-").Replace(".", "-").Replace("/", "-").Replace(":", "-").Replace("+", "-").Replace(",", "-").Replace("'", "-").Replace(",", "-").Replace("`", "-")-@item2.Id" style="color:#4cff00"> @item2.Chapter_Heading</a></li>
+
+                                                }
+                                            }
+
+                                        }
+
+                                    </ul>*@
+
+                                </li>
+                            } 
+
+                        </ul>
+                    </li>
+                    <!--<li><a href="#">Sub Link 4</a></li>
+                      <li><a href="#">Sub Link 5</a></li>-->
+                </ul>
+            }
+
+        </li>
+        <!--<li><a>Demo</a>
+            <ul>
+                <li><a href="#">Sub Link 1</a></li>
+
+            </ul> 
+        </li> 
+        <li><a href="#">Demo</a></li>-->
+        <li>
+            <a class="@TempData["Pack"]">Package</a>
+            <ul>
+                @foreach (var item in Model.SinglePackageList)
+                { 
+                    <li><a href="/Package-detail/@item.Package_Heading.Replace(" ", "-").Replace("~", "-").Replace("!", "-").Replace("&", "-").Replace("?", "-").Replace("%", "-").Replace(".", "-").Replace("/", "-").Replace(":", "-").Replace("+", "-").Replace(",", "-").Replace("'", "-").Replace(",", "-").Replace("`", "-")">@item.Package_Heading</a></li>
+                }
+                @foreach (var item in Model.ComboPackageList)
+                {
+                    <li><a href="/Package-detail/@item.Package_Heading.Replace(" ", "-").Replace("~", "-").Replace("!", "-").Replace("&", "-").Replace("?", "-").Replace("%", "-").Replace(".", "-").Replace("/", "-").Replace(":", "-").Replace("+", "-").Replace(",", "-").Replace("'", "-").Replace(",", "-").Replace("`", "-")">@item.Package_Heading</a></li>
+
+                }  
+            </ul>
+        </li>
+
+    </ul>
+</nav>

@@ -1,0 +1,170 @@
+﻿@model Exellenece.Models.SinglePackage1
+@{
+    ViewBag.Title = "SinglePackage";
+    Layout = "~/Views/Shared/_LayoutManage.cshtml";
+}
+<script>
+    function myFunction() {
+        debugger
+        var x = document.getElementById("Price").value;
+        var y = document.getElementById("DiscountPrice").value;
+        if (Number(x) <= Number(y)) {
+            $('#divDiscountPrice').html("Discount price should be less than the Actual Price!");
+            return false;
+        }
+        else {
+            $('#divDiscountPrice').html("");
+            return true;
+        }
+    }
+</script>
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0 text-dark">Single</h1>
+                    @if (TempData["Err"] != null)
+                    {
+                        <div style="font-size:14px; ">
+                            <div class="alert alert-danger alert-dismissible">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                <strong>Error!! </strong>@TempData["Err"]
+                            </div>
+                        </div>
+                    }
+                    @if (TempData["Succ"] != null)
+                    {
+                        <div style="font-size:14px; ">
+                            <div class="alert alert-success alert-dismissible">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                <strong>Success!! </strong>@TempData["Succ"]
+                            </div>
+                        </div>
+                    }
+                </div>
+                <!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="/Manage/dashboard">Home</a></li>
+                        <li class="breadcrumb-item"><a href="#">Package</a></li>
+                        <li class="breadcrumb-item active">Single</li>
+                    </ol>
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <!-- Small boxes (Stat box) -->
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">Form</h3>
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse"> <i class="fas fa-minus"></i></button>
+                            </div>
+                        </div>
+@using (Html.BeginForm("SinglePackage", "Manage", FormMethod.Post))
+{
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="inputName">Choose Class</label>
+                                <!-- <input type="text" id="inputName" class="form-control">-->
+                                 @if (ViewBag.btn == "Update")
+                                 {
+                                    @Html.DropDownListFor(model => model.Class_Id, new SelectList(Model.ClassList, "Id", "Class_Name"), "Select Class", new { @class = "form-control", id = "classid" })
+
+                                 }
+                                 else
+                                 {
+                                    @Html.DropDownListFor(model => model.Class_Id, new SelectList(Model.ClassList, "Id", "Class_Name"), "Select Class", new { @class = "form-control", id = "classid" })
+                                 }
+                                <span>@Html.ValidationMessageFor(model => model.Class_Id)</span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="inputName">Package Heading</label>
+                                @Html.TextBoxFor(Model => Model.Package_Heading, new { @class = "form-control" })
+                                <span>@Html.ValidationMessageFor(model => model.Package_Heading)</span> 
+                            </div>
+
+                            <div class="form-group">
+                                <label for="inputName">Package Sub Heading</label>
+                                @Html.TextBoxFor(Model => Model.Package_Sub_Heading, new { @class = "form-control" })
+                                <span>@Html.ValidationMessageFor(model => model.Package_Sub_Heading)</span> 
+                            </div>
+
+
+
+                            <div class="form-group">
+                                <label for="inputName">Package Price</label>
+                                @Html.TextBoxFor(Model => Model.Package_Price, new { id = "Price", @class = "form-control" })
+                                <span>@Html.ValidationMessageFor(model => model.Package_Price)</span> 
+                                 
+
+                            </div>
+                            <div class="form-group">
+                                <label for="inputName">Package Discount Price</label>
+                                @Html.TextBoxFor(Model => Model.Package_Discount_Price, new { id = "DiscountPrice", onkeyup = "myFunction()", @class = "form-control" })
+                                <span>@Html.ValidationMessageFor(model => model.Package_Discount_Price)</span> 
+                                <span style="color:Red;font-size:Small;" id="divDiscountPrice"></span>
+
+                            </div>
+
+                            <div class="form-group">
+                                <label for="inputName">Active/Deactive</label>
+                                @Html.DropDownListFor(x => x.Status, new List<SelectListItem>
+                                {
+                                                     new SelectListItem() {Text = "Active", Value="Active"},
+                                                     new SelectListItem() {Text = "Deactive", Value="Deactive"},
+
+                                }, "Select Status", new { @class = "form-control" })
+                                <span>@Html.ValidationMessageFor(model => model.Status)</span>
+                            </div>
+                            <div class="form-group">
+                                @if (ViewBag.btn == "Update")
+                                {
+                                    <input type="submit" value="Update" class="btn btn-success float-right" name="cmd" />
+                                }
+                                else
+                                {
+                                    <input type="submit" value="Submit" class="btn btn-success float-right" name="cmd" />
+                                }
+                            </div>
+                        </div>
+                        }
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+            </div>
+            <!-- /.row -->
+            <!-- Main row -->
+            <div class="row">
+                <!-- Left col -->
+                <div class="col-md-12">
+                    <div class="card card-primary">
+                        <!--bigtable -->
+                        @{
+                            Html.RenderAction("_singlepackageview", new { page = @ViewBag.Type });
+                        }
+
+                         
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+            </div>
+            <!-- /.row (main row) -->
+        </div>
+        <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>

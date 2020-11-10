@@ -1,0 +1,199 @@
+﻿@model Exellenece.Models.Exam1
+@{
+    ViewBag.Title = "package";
+    Layout = Request.IsAjaxRequest() ? null : "~/Views/Shared/_LayoutTalentorientation.cshtml";
+}
+<!-- Inner Page Breadcrumb -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+    $(function () {
+
+        $("#classid").change(function () {
+            $.post("/packagebyid", { "class_Id": $("#classid").val() },
+            function (list3) {
+                debugger
+                $('#fullData').html(list3);
+            });
+        });
+    });
+    function isNumberKey(evt, element) {
+        var charCode = (evt.which) ? evt.which : event.keyCode
+        if (
+            (charCode != 46 || $(element).val().indexOf('.') != -1) &&      // “.” CHECK DOT, AND ONLY ONE.
+            (charCode < 48 || charCode > 57))
+            return false;
+        return true;
+    }
+</script>
+
+<div id="fullData">
+    <section class="inner_page_breadcrumb">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-6">
+                    <div class="breadcrumb_content">
+                        <h4 class="breadcrumb_title">Package</h4>
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="/">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Package</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="col-xl-6">
+                    <div class="header_socallink">
+                        <div class="footer_social_widget mt15">
+                            <ul>
+                                <li class="list-inline-item"><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                <li class="list-inline-item"><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                <li class="list-inline-item"><a href="#"><i class="fa fa-instagram"></i></a></li>
+                                <li class="list-inline-item"><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Text Content -->
+    <section class="about-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="packagehd">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-6">Choose Your Grade</div>
+                            <div class="col-sm-12 col-md-6">
+                                @Html.DropDownListFor(model => model.Class_Id, new SelectList(Model.ClassList, "Id", "Class_Name"), "Select Class", new { id = "classid" })
+                            </div>
+                        </div>
+                    </div>
+                    @if (Model.FullData.Count > 0)
+                    {
+                        <div class="packagecont">
+
+                            <ul id="myTabs" class="packagetabbing nav nav-pills nav-justified" role="tablist" data-tabs="tabs">
+                                @{int i = 0;
+                                    string class_Name = "";
+                                }
+                                @foreach (var item in Model.FullData)
+                                {
+                                    if (i == 0)
+                                    {
+                                        class_Name = "active";
+                                    }
+                                    else
+                                    {
+                                        class_Name = "";
+                                    }
+                                    <li>
+                                        <a href="#Commentary_@i" data-toggle="tab" class="@class_Name">
+                                            <label class="" for="package1">
+                                                <!-- <input id="package1" class="radioClick" value="6" type="radio" name="course" onchange="handleRadioChange();">
+                                                <span class="raido-btn"></span> -->
+                                                <em>
+                                                    <span class="forClass">@item.Package_Heading</span>
+                                                    @if (TempData["Date"] != null)
+                                                    {
+                                                        <span id="validity1" class="val">
+                                                            (Valid till @DateTime.Parse(TempData["Date"].ToString()).ToString("dddd, dd MMMM yyyy").Split(',').ElementAt(1)
+
+                                                        </span>
+                                                    }
+                                                </em>
+                                            </label>
+                                        </a>
+                                    </li>
+                                    i = i + 1;
+                                }
+
+
+                            </ul>
+                            <div class="tab-content">
+                                @{int j = 0;
+                                    string class_Name1 = "";
+                                }
+                                @foreach (var item in Model.FullData)
+                                {
+                                    if (j == 0)
+                                    {
+                                        class_Name1 = "show fade in active";
+                                    }
+                                    else
+                                    {
+                                        class_Name1 = "";
+                                    }
+                                    <div role="tabpanel" class="tab-pane @class_Name1" id="Commentary_@j">
+                                        <div class="row">
+                                            <div class="col-sm-12 col-md-8">
+                                                <label class="block group packagelabel">
+                                                    <input type="checkbox" name="" hidden="hidden" checkouttext="All Subjects" value="opt0" checked="true"><span class="checkbox"></span>
+                                                    <div class="inline-block addOns">@item.Package_Heading<span>(@item.Package_Sub_Heading)</span></div>
+                                                    @if (item.Package_Discount_Price == item.Package_Price)
+                    {
+                                                        <div class="inline-block  pull-right addOnsPrice"><i class="mn-rupee mnPrice"></i>@item.Package_Discount_Price <i class="mn-rupee delPrice"></i></div>
+                                                    }
+                                                    else
+                                                    {
+                                                        double TotalDis;
+                                                        double DidPer = 0;
+                                                        double save = 0;
+                                                        if (item.Package_Discount_Price != 0)
+                                                        {
+                                                            TotalDis = item.Package_Price - item.Package_Discount_Price;
+                                                            DidPer = TotalDis * 100 / item.Package_Price;
+                                                            DidPer = Math.Round(DidPer, 0);
+                                                        }
+                                                        save = item.Package_Price - item.Package_Discount_Price;
+                                                        <div class="inline-block  pull-right addOnsPrice">
+                                                            <i class="mn-rupee mnPrice"></i>@item.Package_Discount_Price <i class="mn-rupee delPrice"></i> <del>@item.Package_Price</del>
+                                                            <span style="display:none"><i class="mn-rupee"></i> 768/month</span><small>You Save <i class="mn-rupee"></i>@save (@DidPer%)</small>
+                                                        </div>
+                                                    }
+                                                </label>
+                                            </div>
+                                            @using (Html.BeginForm("process", "Talentorientation", FormMethod.Post))
+                                            {
+                                                @Html.HiddenFor(c => c.Combo_Type, new { @Value = item.Combo_Type })
+
+                                                @Html.HiddenFor(c => c.Class_Name, new { @Value = item.Package_Heading })
+
+                                                @Html.HiddenFor(c => c.Id, new { @Value = item.Id })
+
+
+                                                @Html.HiddenFor(c => c.Price, new { @Value = item.Package_Price })
+
+                                                @Html.HiddenFor(c => c.Discount_Price, new { @Value = item.Package_Discount_Price })
+                                                <div class="col-sm-12 col-md-4" style="position: relative;">
+                                                    <button class="packagebtn1" type="submit">Buy Now</button>
+
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                    j = j + 1;
+                                }
+
+
+
+
+                            </div>
+                            <!-- end -->
+
+                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="packagecont" style="text-align:center;color:#ffd800">
+                                            <h1>Data not found</h1>
+                                        </div>
+                                    }
+
+
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

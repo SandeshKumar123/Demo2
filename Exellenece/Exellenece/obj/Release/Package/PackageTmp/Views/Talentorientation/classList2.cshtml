@@ -1,0 +1,11 @@
+﻿@model Exellenece.Models.Exam1
+@{int i = 1; }
+@foreach (var item in Model.ClassList)
+{
+    if (i > 7)
+    {
+        <li><a href="/coming-soon">@item.Class_Name</a></li>
+    }
+    i = i + 1;
+}
+

@@ -1,0 +1,112 @@
+﻿@model Exellenece.Models.Exam1
+@{
+    ViewBag.Title = "onlinetest";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+<!-- Inner Page Breadcrumb -->
+<section class="inner_page_breadcrumb dashboard">
+    <div class="container">
+        <div class="row">
+
+        </div>
+    </div>
+</section>
+
+<!-- About Text Content -->
+<section class="about-section">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 col-lg-2 col-xl-2 post2 hidden2">
+                <div class="side-heading">
+                    <i class="fa fa-book"></i> Student Panel
+                    <div class="clear"></div>
+                </div>
+
+
+                @{
+                    Html.RenderAction("_BindLeftMenu");
+                }
+
+            </div>
+
+            <div class="col-md-12 col-lg-10 col-xl-10">
+                <nav class="breadcrumb_widgets" aria-label="breadcrumb mb30">
+                    <h4 class="title float-left">Online Test</h4>
+                    <ol class="breadcrumb float-right">
+                        <li class="breadcrumb-item"><a href="/dashboard">Home</a></li> 
+                        <li class="breadcrumb-item"><a href="#">@ViewBag.Board_Name</a></li>
+                        <li class="breadcrumb-item"><a href="#">@ViewBag.Clas_Name</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">@ViewBag.Subject_Data</li>
+                    </ol>
+
+                    <div class="clear"></div>
+                </nav>
+
+                <div class="row">
+
+
+                    <div class="col-md-12">
+                        <div class="background22">
+
+                            <div class="fl-left">
+                                <div class="user-id">Dimentions</div>
+                                <div class="colone">:</div>
+                                <div class="form-right">
+                                    Adaptabillty <br>
+                                    Achievment
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+
+                            <div class="fl-left">
+                                <div class="user-id">Total Questions </div>
+                                <div class="colone">:</div>
+                                <div class="form-right">@Model.ExamList.Count</div>
+                                <div class="clear"></div>
+                            </div>
+
+                            <div class="fl-left">
+                                <div class="user-id">Time Limit</div>
+                                <div class="colone">:</div>
+                                <div class="form-right"> 15 Min</div>
+                                <div class="clear"></div>
+                            </div>
+
+                            <div class="fl-left">
+                                <div class="user-id">Instructions</div>
+                                <div class="colone">:</div>
+                                <div class="form-right">
+                                    <ul>
+                                        <li><i class="fa fa-angle-right"></i> Give your first and immediate response to every question.</li>
+                                        <li><i class="fa fa-angle-right"></i> Give your first and immediate response to every question.</li>
+                                        <li><i class="fa fa-angle-right"></i> Give your first and immediate response to every question.</li>
+                                    </ul>
+
+
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+
+                            @if (Model.ExamList.Count > 0)
+                            {
+                                using (Html.BeginForm("test", "Talentorientation", FormMethod.Post))
+                                {
+                                    @Html.HiddenFor(c => c.Chapter_Id, new { @Value = Model.ExamList.ElementAt(0).Chapter_Id });
+
+                                    <button type="submit" class="my_setting_savechange_btn btn btn-thm pull-right mgtop"><i class="fa fa-pencil-square-o"></i> Start Test</button>
+                                }
+                            }
+                            else
+                            {
+                                <button style="cursor:not-allowed" type="button" class="my_setting_savechange_btn btn btn-thm pull-right mgtop"><i class="fa fa-pencil-square-o"></i>Question not available</button>
+
+                            }  
+                            <div class="clear"></div>
+                        </div> 
+                    </div>  
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>

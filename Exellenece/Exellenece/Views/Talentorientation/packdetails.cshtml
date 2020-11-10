@@ -1,0 +1,108 @@
+﻿@model Exellenece.Models.Exam1
+<div class="packagecont">
+    <ul id="myTabs" class="packagetabbing nav nav-pills nav-justified" role="tablist" data-tabs="tabs">
+        <li>
+            <a href="#Commentary" data-toggle="tab" class="active">
+                <label class="" for="package1">
+                    <!-- <input id="package1" class="radioClick" value="6" type="radio" name="course" onchange="handleRadioChange();">
+                    <span class="raido-btn"></span> -->
+                    <em>
+                        @foreach (var item in Model.SinglePackageList)
+                        { 
+                         <span class="forClass">@item.Package_Heading</span>
+                            if (TempData["Date"].ToString() != null)
+                            {
+                                <span id="validity1" class="val">
+                                    (Valid till @DateTime.Parse(TempData["Date"].ToString()).ToString("dddd, dd MMMM yyyy").Split(',').ElementAt(1)
+
+                                </span>
+                            }
+
+                        } 
+                    </em>
+                </label>
+            </a>
+        </li> 
+    </ul>
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane show fade in active" id="Commentary">
+            <div class="row">
+                <div class="col-sm-12 col-md-8">
+@foreach (var item in Model.SinglePackageList)
+{
+    <label class="block group packagelabel">
+        <input type="checkbox" name="" hidden="hidden" checkouttext="All Subjects" value="opt0" checked="true"><span class="checkbox"></span>
+        <div class="inline-block addOns">@item.Package_Heading<span>(Videos, variety of tests, smart reports &amp; more)</span></div>
+        @if (item.Package_Discount_Price == item.Package_Price)
+        {
+            <div class="inline-block  pull-right addOnsPrice"><i class="mn-rupee mnPrice"></i>@item.Package_Discount_Price <i class="mn-rupee delPrice"></i></div>
+        }
+        else
+        {
+            double TotalDis;
+            double DidPer = 0;
+            double save = 0;
+            if (item.Package_Discount_Price != 0)
+            {
+                TotalDis = item.Package_Price - item.Package_Discount_Price;
+                DidPer = TotalDis * 100 / item.Package_Price;
+                DidPer = Math.Round(DidPer, 0);
+            }
+            save = item.Package_Price - item.Package_Discount_Price;
+            <div class="inline-block  pull-right addOnsPrice">
+                <i class="mn-rupee mnPrice"></i>@item.Package_Discount_Price <i class="mn-rupee delPrice"></i> <del>@item.Package_Price</del>
+                <span style="display:none"><i class="mn-rupee"></i> 768/month</span><small>You Save <i class="mn-rupee"></i>@save (@DidPer%)</small>
+            </div>
+        }
+    </label>
+                    <!-- end -->
+                    }
+                </div>
+
+                <div class="col-sm-12 col-md-4" style="position: relative;">
+                    <a href="#" class="packagebtn">Buy Now</a>
+                </div>
+            </div>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="Videos">
+            <div class="row">
+                <div class="col-sm-12 col-md-8">
+                    @foreach (var item in Model.ComboPackageList)
+                    {
+                        <label class="block group packagelabel">
+                            <input type="checkbox" name="" hidden="hidden" checkouttext="All Subjects" value="opt0" checked="true"><span class="checkbox"></span>
+                            <div class="inline-block addOns">@item.Package_Heading<span>(Videos, variety of tests, smart reports &amp; more)</span></div>
+                            @if (item.Package_Discount_Price == item.Package_Price)
+                            {
+                                <div class="inline-block  pull-right addOnsPrice"><i class="mn-rupee mnPrice"></i>@item.Package_Discount_Price <i class="mn-rupee delPrice"></i></div>
+                            }
+                            else
+                            {
+                                double TotalDis;
+                                double DidPer = 0;
+                                double save = 0;
+                                if (item.Package_Discount_Price != 0)
+                                {
+                                    TotalDis = item.Package_Price - item.Package_Discount_Price;
+                                    DidPer = TotalDis * 100 / item.Package_Price;
+                                    DidPer = Math.Round(DidPer, 0);
+                                }
+                                save = item.Package_Price - item.Package_Discount_Price;
+                                <div class="inline-block  pull-right addOnsPrice">
+                                    <i class="mn-rupee mnPrice"></i>@item.Package_Discount_Price <i class="mn-rupee delPrice"></i> <del>@item.Package_Price</del>
+                                    <span style="display:none"><i class="mn-rupee"></i> 768/month</span><small>You Save <i class="mn-rupee"></i>@save (@DidPer%)</small>
+                                </div>
+                            }
+                        </label>
+                    <!-- end -->
+                    }
+                    <!-- end -->
+                </div> 
+                <div class="col-sm-12 col-md-4" style="position: relative;">
+                    <a href="#" class="packagebtn">Buy Now</a>
+                </div>
+            </div>
+        </div>  
+    </div>
+    <!-- end -->
+</div>
